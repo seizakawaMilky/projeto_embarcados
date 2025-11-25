@@ -1,0 +1,77 @@
+#include <DHT.h>
+#define DHTPIN A1
+#define DHTTYPE DHT11
+
+DHT dht(DHTPIN, DHTTYPE);
+
+#define PINO_TRIG 4
+#define PINO_ECHO 2
+#define PINO_LDR A2
+#define PINO_BUZZER A0
+#define PINO_LED_VERMELHO 5
+#define PINO_LED_AMARELO 6
+ 
+const int DISTANCIA_ALARME = 50;
+const int LUZ_BAIXA = 600;
+const float TEMP_BAIXA = 35.0;
+
+
+void setup() {
+  Serial.begin(9600);
+  dht.begin();
+
+  pinMode(PINO_TRIG, OUTPUT);
+  pinMode(PINO_ECHO, INPUT);
+  pinMode(PINO_BUZZER, OUTPUT);
+  pinMode(PINO_LED_AMARELO, OUTPUT);
+  pinMode(PINO_LED_VERMELHO, OUTPUT);
+}
+ 
+void loop() {
+  float t = dht.readTemperature();
+  int nivelLuz = lerNivelLuz();
+  long distancia = lerDistancia();
+
+  if (isnan(t)) {
+    Serial.println(F("Failed to read from DHT sensor!"));
+    return;
+  }
+  Serial.print("Dist: "); Serial.print(distancia);
+  Serial.print(" cm | Temp: "); Serial.print(t);
+  Serial.print(" C | Luz: "); Serial.println(nivelLuz);
+ 
+  if (distancia < DISTANCIA_ALARME && distancia > 0) {
+    tone(PINO_BUZZER, 1000);
+  } else {
+    noTone(PINO_BUZZER);
+  }
+ 
+  if (t < TEMP_BAIXA) {
+    digitalWrite(PINO_LED_VERMELHO, HIGH);
+  } else {
+    digitalWrite(PINO_LED_VERMELHO, LOW);
+  }
+ 
+  if (nivelLuz < LUZ_BAIXA) {
+    digitalWrite(PINO_LED_AMARELO, HIGH);
+  } else {
+    digitalWrite(PINO_LED_AMARELO, LOW);
+  }
+ 
+  delay(200);
+}
+ 
+int lerNivelLuz() {
+  return analogRead(PINO_LDR);
+}
+ 
+long lerDistancia() {
+  digitalWrite(PINO_TRIG, LOW);
+  delayMicroseconds(2);
+  digitalWrite(PINO_TRIG, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(PINO_TRIG, LOW);
+  long duracao = pulseIn(PINO_ECHO, HIGH);
+  long distancia = duracao * 0.034 / 2;
+  return distancia;
+}
