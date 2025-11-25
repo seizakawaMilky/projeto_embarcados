@@ -1,5 +1,5 @@
 # projeto_embarcados
-Trabalho de Sistemas Embarcados - sistema de caa inteligente com sensores e atuadores
+Trabalho de Sistemas Embarcados - sistema de casa inteligente com sensores e atuadores.
 
 Integrantes da equipe: Luciana Rodrigues de Lara, Tainá Friedemann Lopes da Silva, Yasmin Friedemann Lopes da Silva
 
