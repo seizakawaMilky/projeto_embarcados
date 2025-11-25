@@ -1,11 +1,11 @@
 # projeto_embarcados
-Trabalho de Sistemas Embarcados - sistema com sensores e atuadores
+Trabalho de Sistemas Embarcados - sistema de caa inteligente com sensores e atuadores
 
 Integrantes da equipe: Luciana Rodrigues de Lara, Tainá Friedemann Lopes da Silva, Yasmin Friedemann Lopes da Silva
 
-Objetivo do projeto: O projeto é um mini sistema de segurança domiciliar. Ele detecta passagem de pessoas tocando um alarme quando há movimentações, acende as luzes durante a noite, e indica com uma luz vermelha quando o ambiente está muito frio.
+Objetivo do projeto: O projeto é um mini sistema de casa inteligente. Ele detecta passagem de pessoas tocando um alarme quando há movimentações, acende as luzes durante a noite, e indica com uma luz vermelha quando o ambiente está muito frio.
 
-Elememntos utilizados:
+Elementos utilizados:
 - Sensor de temperatura/umidade DHT11
 - Sensor de luminosidade LDR 5mm
 - Buzzer passivo 5V
